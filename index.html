@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Valentine</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+}
+.container {
+  background: white;
+  padding: 40px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  position: relative;
+  width: 90%;
+  max-width: 400px;
+}
+button {
+  padding: 12px 25px;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+#yes { background:#4CAF50; color:white; }
+#no { background:#f44336; color:white; position:absolute; }
+.confetti {
+  position:absolute;
+  width:10px;
+  height:10px;
+  top:-10px;
+  animation:fall 3s linear forwards;
+}
+@keyframes fall {
+  to { transform: translateY(110vh) rotate(720deg); }
+}
+</style>
+</head>
+
+<body>
+<div class="container" id="container">
+  <h1>Johannes,<br>will you be my Valentine? 💘</h1>
+  <button id="yes">Yes</button>
+  <button id="no">No</button>
+  <h2 id="result" style="display:none;">Besser isses du Gangal 😌🎉</h2>
+</div>
+
+<script>
+const noBtn=document.getElementById("no");
+const yesBtn=document.getElementById("yes");
+const result=document.getElementById("result");
+const container=document.getElementById("container");
+
+noBtn.style.left="50%";
+noBtn.style.top="70%";
+
+noBtn.addEventListener("mouseover",()=>{
+  const r=container.getBoundingClientRect();
+  noBtn.style.left=Math.random()*(r.width-noBtn.offsetWidth)+"px";
+  noBtn.style.top=Math.random()*(r.height-noBtn.offsetHeight)+"px";
+});
+
+yesBtn.addEventListener("click",()=>{
+  yesBtn.style.display="none";
+  noBtn.style.display="none";
+  result.style.display="block";
+  for(let i=0;i<80;i++){
+    const c=document.createElement("div");
+    c.className="confetti";
+    c.style.left=Math.random()*100+"vw";
+    c.style.background=["#ff4d6d","#4CAF50","#ffd166","#6a4c93"][Math.floor(Math.random()*4)];
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),3000);
+  }
+});
+</script>
+</body>
+</html>
